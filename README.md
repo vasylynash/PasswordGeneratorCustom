@@ -11,4 +11,4 @@ Click the **Generate password** to generate the password.
 
 [Deployed web page](https://vasylynash.github.io/PasswordGeneratorCustom/)
 
-(assets/screenshot/Password_Generator.gif)
+![Sample image](assets/screenshot/Password_Generator.gif)

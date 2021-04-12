@@ -25,29 +25,29 @@
             <div class="options">
                 <div class="option">
                     <label>Length</label>
-                    <input type="number" id="length" min="8" max="128" value="8" onblur="return validateLength()">
+                    <input type="number" id="length" min="8" max="128" value="8" onchange="updateButton()">
                 </div>
                 <span id="error"></span>
                 <div class="option">
                     <label>Include lowercase letters</label>
-                    <input type="checkbox" id="lowercase" checked>
+                    <input type="checkbox" id="lowercase" checked onchange="updateButton()">
                 </div>
                 <div class="option">
                     <label>Include uppercase letters</label>
-                    <input type="checkbox" id="uppercase" checked>
+                    <input type="checkbox" id="uppercase" checked onchange="updateButton()">
                 </div>
                 <div class="option">
                     <label>Include numbers</label>
-                    <input type="checkbox" id="numbers" checked>
+                    <input type="checkbox" id="numbers" checked onchange="updateButton()">
                 </div>
                 <div class="option">
                     <label>Include special characters</label>
-                    <input type="checkbox" id="symbols" checked>
+                    <input type="checkbox" id="symbols" checked onchange="updateButton()">
                 </div>
                 <span id="emptyOptions"></span>
             </div>
             <div class="card-footer">
-                <button id="generate" class="btn">Generate Password</button>
+                <button id="generate" class="btn" onclick="writePassword()">Generate Password</button>
             </div>
         </div>
     </div>

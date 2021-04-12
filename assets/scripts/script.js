@@ -8,18 +8,39 @@ var symbolsCheckbox = document.getElementById("symbols");
 var generateButton = document.getElementById("generate");
 var textArea = document.getElementById("password");
 
-
 // Validate the length of the password
 function validateLength() {
     let length = lengthField.value;
     let min = Number(lengthField.getAttribute("min"));
     let max = Number(lengthField.getAttribute("max"))
     if (length < min || length > max) {
-        errorMessage.innerText = "Please enter a number between 8 and 128"
+        errorMessage.innerText = "Please enter a number from 8 to 128"
+        return false;
     } else {
         errorMessage.innerText = "";
+        return true;
     }
 
+}
+
+// Validate the checkboxes selection
+function validateOptions() {
+    let includeLowercase = lowerCaseCheckbox.checked;
+    let includeUpperCase = upperCaseCheckbox.checked;
+    let includeNumbers = numbersCheckbox.checked;
+    let includeSymbols = symbolsCheckbox.checked;
+    if (!includeLowercase && !includeUpperCase && !includeNumbers && !includeSymbols) {
+        emptyOptionsError.innerText = "Please select at least one option"
+        return false;
+    } else {
+        emptyOptionsError.innerText = "";
+        return true;
+    }
+}
+
+// Disable or enable button based on user input
+function updateButton() {
+    generateButton.disabled = !validateOptions() || !validateLength();
 }
 
 // Fill array with values to generate a password
@@ -40,18 +61,15 @@ const SYMBOLS = arrayofValues(33, 47)
     .concat(arrayofValues(91, 96))
     .concat(arrayofValues(123, 126));
 
+
 // Perform actions on Generate button click
-generateButton.addEventListener("click", function () {
+function writePassword() {
     let length = lengthField.value;
+
     let includeLowercase = lowerCaseCheckbox.checked;
     let includeUpperCase = upperCaseCheckbox.checked;
     let includeNumbers = numbersCheckbox.checked;
     let includeSymbols = symbolsCheckbox.checked;
-    if (!includeLowercase && !includeUpperCase && !includeNumbers && !includeSymbols) {
-        emptyOptionsError.innerText = "Please select at least one option"
-    } else {
-        emptyOptionsError.innerText = "";
-    }
 
     const password = generatePassword(
         length,
@@ -62,7 +80,7 @@ generateButton.addEventListener("click", function () {
     );
 
     textArea.value = password;
-});
+};
 
 // Generate password
 function generatePassword(length, includeLowerCase, includeUpperCase, includeNumbers, includeSymbols) {
